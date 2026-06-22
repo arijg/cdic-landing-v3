@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a9099"/>
+      <stop offset="100%" stop-color="#0d5861"/>
+    </linearGradient>
+  </defs>
+  <!-- Rounded square background -->
+  <rect width="100" height="100" rx="22" fill="url(#bg)"/>
+  <!-- Stylized C — open arc drawn as a thick stroked path -->
+  <path
+    d="M67 28
+       C54 22 36 26 30 42
+       C24 58 32 76 50 80
+       C59 82 67 79 73 73"
+    fill="none"
+    stroke="white"
+    stroke-width="14"
+    stroke-linecap="round"
+  />
+  <!-- Small dot to suggest a tooth/biologic detail -->
+  <circle cx="68" cy="50" r="4.5" fill="rgba(255,255,255,0.35)"/>
+</svg>
