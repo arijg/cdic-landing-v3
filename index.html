@@ -15,6 +15,15 @@
     gtag('config', 'G-T39R22B0YR');
   </script>
 
+  <!-- OpenAI Ads Measurement Pixel -->
+  <script>
+    window.oaiq = window.oaiq || function () {
+      (window.oaiq.q = window.oaiq.q || []).push(arguments);
+    };
+    oaiq("init", { pixelId: "Wemdo9h3MRg3YR3ktpiU1R" });
+  </script>
+  <script async src="https://bzrcdn.openai.com/sdk/oaiq.min.js"></script>
+
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="apple-touch-icon" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -1108,11 +1117,24 @@
       || data.event === 'form_submitted'
       || data.type === 'FORM_SUBMITTED'
       || (typeof data === 'string' && data.includes('form_submitted'));
-    if (isSubmit && typeof gtag === 'function') {
-      gtag('event', 'generate_lead', {
-        event_category: 'form',
-        event_label: 'booking_request'
-      });
+    if (isSubmit) {
+      // Google Analytics 4 lead event
+      if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', {
+          event_category: 'form',
+          event_label: 'booking_request'
+        });
+      }
+      // OpenAI Ads conversion — lead_created (shared event_id for browser/server dedupe)
+      if (typeof oaiq === 'function') {
+        var oaiEventId = 'lead_' + ((window.crypto && crypto.randomUUID)
+          ? crypto.randomUUID()
+          : (Date.now() + '_' + Math.random().toString(36).slice(2)));
+        oaiq('measure', 'lead_created',
+          { type: 'customer_action' },
+          { event_id: oaiEventId }
+        );
+      }
     }
   });
 </script>
